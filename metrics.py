@@ -1,0 +1,25 @@
+"""Расчёт показателей доступности сервисов по результатам проверок."""
+import csv
+
+
+def load_checks(path):
+    with open(path, newline="", encoding="utf-8") as f:
+        return list(csv.DictReader(f))
+
+
+def for_service(checks, service):
+    return [c for c in checks if c["service"] == service]
+
+
+def availability(checks):
+    if not checks:
+        return 0.0
+    ok = sum(1 for c in checks if c["status"] == "up")
+    return 100 * ok / len(checks)
+
+
+def avg_response(checks):
+    times = [int(c["response_ms"]) for c in checks if c["status"] == "up"]
+    if not times:
+        return 0
+    return sum(times) / len(times)
