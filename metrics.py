@@ -30,3 +30,7 @@ def p95_response(checks):
     if not times:
         return 0
     return times[max(0, round(0.95 * len(times)) - 1)]
+
+
+def downtime_minutes(checks, interval_min=5):
+    return interval_min * sum(1 for c in checks if c["status"] == "down")
