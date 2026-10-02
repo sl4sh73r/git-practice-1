@@ -16,3 +16,8 @@ def slow_alert(service, avg_ms):
     if avg_ms > RESPONSE_THRESHOLD_MS:
         return f"ALERT {service}: среднее время ответа {avg_ms:.0f} мс выше {RESPONSE_THRESHOLD_MS} мс"
     return None
+
+
+def severity(availability):
+    """Уровень критичности инцидента по доступности."""
+    return "critical" if availability < 95 else "warning"
