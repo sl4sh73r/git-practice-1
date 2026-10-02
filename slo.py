@@ -15,3 +15,8 @@ def error_budget(service):
 def budget_left(service, availability):
     """Остаток бюджета ошибок, процентные пункты."""
     return round(error_budget(service) - (100 - availability), 4)
+
+
+def burn_rate(service, availability):
+    """Во сколько раз быстрее нормы расходуется бюджет ошибок."""
+    return round((100 - availability) / error_budget(service), 2)
