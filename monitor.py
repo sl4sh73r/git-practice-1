@@ -3,7 +3,7 @@ import sys
 
 import metrics
 
-VERSION = "1.0"
+VERSION = "1.2"
 
 
 def build_report(checks):
