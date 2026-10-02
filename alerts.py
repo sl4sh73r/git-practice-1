@@ -21,3 +21,10 @@ def slow_alert(service, avg_ms):
 def severity(availability):
     """Уровень критичности инцидента по доступности."""
     return "critical" if availability < 95 else "warning"
+
+
+CHANNELS = {"critical": "дежурный инженер (звонок)", "warning": "чат команды"}
+
+
+def channel(level):
+    return CHANNELS[level]
