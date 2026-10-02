@@ -3,11 +3,13 @@ import csv
 
 
 def load_checks(path):
+    """Читает журнал проверок из CSV."""
     with open(path, newline="", encoding="utf-8") as f:
         return list(csv.DictReader(f))
 
 
 def for_service(checks, service):
+    """Проверки одного сервиса."""
     return [c for c in checks if c["service"] == service]
 
 
