@@ -23,3 +23,10 @@ def avg_response(checks):
     if not times:
         return 0
     return sum(times) / len(times)
+
+
+def p95_response(checks):
+    times = sorted(int(c["response_ms"]) for c in checks if c["status"] == "up")
+    if not times:
+        return 0
+    return times[max(0, round(0.95 * len(times)) - 1)]
