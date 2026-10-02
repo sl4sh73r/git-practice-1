@@ -3,19 +3,18 @@ import sys
 
 import metrics
 
-VERSION = "1.1"
+VERSION = "1.2"
 
 
 def build_report(checks):
     lines = [
         f"PulseWatch v{VERSION}: отчёт о доступности сервисов",
-        f"{'сервис':<10}{'доступность':>12}{'ответ, мс':>11}{'p95, мс':>9}{'простой, мин':>14}",
+        f"{'сервис':<10}{'доступность':>12}{'ответ, мс':>11}",
     ]
     for name in sorted({c["service"] for c in checks}):
         rows = metrics.for_service(checks, name)
         lines.append(
             f"{name:<10}{metrics.availability(rows):>11.2f}%{metrics.avg_response(rows):>11.0f}"
-            f"{metrics.p95_response(rows):>9}{metrics.downtime_minutes(rows):>14}"
         )
     return "\n".join(lines)
 
